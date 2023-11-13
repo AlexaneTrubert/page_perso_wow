@@ -1,0 +1,61 @@
+<!-- Les donjons m+ de la saison -->
+<section class="donjon w-full p-4">
+  <div class="bg-gray-900">
+    <div class="w-full">
+      <div class="bg-gray-900 py-10">
+        <div class="sm:flex sm:items-center">
+          <div class="sm:flex-auto">
+            <h2 class="text-base font-semibold leading-6 text-white">Donjons M+</h2>
+            <p class="mt-2 text-sm text-gray-300">Liste de vos meilleures runs par donjon</p>
+          </div>
+        </div>
+        <div class="mt-8 flow-root">
+          <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+              <table *ngIf="donjons.length > 0; else noDonjon"
+                     class="min-w-full divide-y divide-gray-700 donjon-table">
+                <thead>
+                <tr>
+                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-0">
+                    Nom
+                    du donjon
+                  </th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Fortifié</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Tyranique</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Points</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Meilleur temps
+                  </th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Affix</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Top Mondial
+                  </th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Top Région</th>
+                </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-800">
+                <tr class="donjon-row" *ngFor="let donjon of donjons">
+                  <td
+                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">{{ donjon.nom }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.niveauFortifie}}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">+{{ donjon.niveauTyranique }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.points }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.temps }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
+                    <ul class="flex">
+                      <li *ngFor="let affix of donjon.affixes" class="list-affix">{{ affix.nom }}/</li>
+                    </ul>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.topMonde }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.topRegion }}</td>
+                </tr>
+                </tbody>
+              </table>
+              <ng-template #noDonjon><p class="text-sm text-gray-200 no-donjon">Aucun donjon disponible</p>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Les donjons m+ de la saison -->
