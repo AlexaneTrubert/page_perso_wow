@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {Affixes, Donjons} from "./types";
+import {Donjons} from "./types";
+import {Input} from "@angular/core";
 
 @Component({
   selector: 'app-donjons',
@@ -7,6 +8,7 @@ import {Affixes, Donjons} from "./types";
   styles: []
 })
 export class DonjonsComponent {
-  affixes: Affixes = [];
+  @Input()
   donjons: Donjons = [];
+
 }

@@ -1,0 +1,50 @@
+<!-- Les raids de la saison -->
+<section class="raid w-full p-4">
+  <div class="bg-gray-900">
+    <div class="w-full">
+      <div class="bg-gray-900 py-10">
+        <div class="sm:flex sm:items-center">
+          <div class="sm:flex-auto">
+            <h2 class="text-base font-semibold leading-6 text-white">Progress raid</h2>
+            <p class="mt-2 text-sm text-gray-300">Liste de votre progress par raid</p>
+          </div>
+        </div>
+        <div class="mt-8 flow-root">
+          <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+              <table *ngIf="raids.length > 0; else noRaids"
+                     class="min-w-full divide-y divide-gray-700 donjon-table">
+                <thead>
+                <tr>
+                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-0">
+                    Nom du raid
+                  </th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Résumé</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Nombre total de boss
+                  </th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Progress NM</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Progress HM</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Progress MM</th>
+                </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-800">
+                <tr class="donjon-row" *ngFor="let raid of raids">
+                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">{{ raid.nom }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ raid.summary }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ raid.boss }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ raid.nm }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ raid.hm }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ raid.mm }}</td>
+                </tr>
+                </tbody>
+              </table>
+              <ng-template #noRaids><p class="text-sm text-gray-200 no-donjon">Aucun raid disponible</p>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Les raids de la saison -->

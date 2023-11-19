@@ -1,8 +1,11 @@
 export type Activite = {
-  pseudo: string;
-  date: string;
-  donjon: string;
-  niveau: number;
+  date?: string;
+  donjon?: string;
+  niveau?: number;
 };
 
-export type Activites = Activite[];
+export type Activites = {
+  pseudo: string;
+  thumbnail_url: string;
+  activitesArray: Activite[];
+};

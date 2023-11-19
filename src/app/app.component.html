@@ -1,105 +1,71 @@
-<div>
-  <app-perso></app-perso>
+<app-perso [persos]="persos" [guildes]="guildes" [perso]="perso"></app-perso>
+<div class="xl:pl-72">
+  <section class="search">
+    <div
+      class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-6 border-b border-white/5 bg-gray-900 px-4 shadow-sm sm:px-6 lg:px-8">
+      <button type="button" class="-m-2.5 p-2.5 text-white xl:hidden">
+        <span class="sr-only">Open sidebar</span>
+        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd"
+                d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10zm0 5.25a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75a.75.75 0 01-.75-.75z"
+                clip-rule="evenodd"/>
+        </svg>
+      </button>
 
-  <main>
-    <div class="xl:pl-72">
-      <section class="search">
-        <div
-          class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-6 border-b border-white/5 bg-gray-900 px-4 shadow-sm sm:px-6 lg:px-8">
-          <button type="button" class="-m-2.5 p-2.5 text-white xl:hidden">
-            <span class="sr-only">Open sidebar</span>
-            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <!-- Bloc Recherche -->
+      <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
+        <form [formGroup]="search" (submit)="onSubmit()" class="flex flex-1 items-center">
+          <label for="search-field" class="sr-only">Recherche</label>
+          <div class="relative w-full flex self-stretch items-center gap-x-4">
+            <svg class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-500" viewBox="0 0 20 20"
+                 fill="currentColor" aria-hidden="true">
               <path fill-rule="evenodd"
-                    d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10zm0 5.25a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75a.75.75 0 01-.75-.75z"
+                    d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
                     clip-rule="evenodd"/>
             </svg>
-          </button>
+            <input formControlName="name" id="search-field"
+                   class="block h-full border-0 bg-transparent py-0 pl-8 pr-0 text-white focus:ring-0 sm:text-sm"
+                   placeholder="Recherche..." type="search" name="search">
+            <div class="flex gap-x-4">
+              <label for="royaume" class="sr-only">Royaume</label>
+              <select formControlName="region" id="royaume" name="location"
+                      class="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                <option value="us">US</option>
+                <option value="eu" selected>EU</option>
+              </select>
 
-          <!-- Bloc Recherche -->
-          <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-            <form [formGroup]="search" (submit)="onSubmit()" class="flex flex-1 items-center">
-              <label for="search-field" class="sr-only">Recherche</label>
-              <div class="relative w-full flex self-stretch items-center gap-x-4">
-                <svg class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-500" viewBox="0 0 20 20"
-                     fill="currentColor" aria-hidden="true">
-                  <path fill-rule="evenodd"
-                        d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
-                        clip-rule="evenodd"/>
-                </svg>
-                <input formControlName="name" id="search-field"
-                       class="block h-full border-0 bg-transparent py-0 pl-8 pr-0 text-white focus:ring-0 sm:text-sm"
-                       placeholder="Recherche..." type="search" name="search">
-                <div class="flex gap-x-4">
-                  <label for="royaume" class="sr-only">Royaume</label>
-                  <select formControlName="realm" id="royaume" name="location"
-                          class="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                    <option value="us">US</option>
-                    <option value="eu" selected>EU</option>
-                    <option value="ch">CH</option>
-                  </select>
-
-                  <label for="serveur" class="sr-only">Serveur</label>
-                  <select formControlName="server" id="serveur" name="location"
-                          class="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                    <option value="lesSentienelles" selected>Les Sentinelles</option>
-                    <option value="hyjal">Hyjal</option>
-                    <option value="lesClairvoyants">Les Clairvoyants</option>
-                  </select>
-                </div>
-                <button type="button"
-                        class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
-                  Rechercher
-                </button>
-              </div>
-            </form>
-          </div>
-          <!-- Bloc Recherche -->
-        </div>
-      </section>
-
-      <main class="lg:pr-96">
-        <header class="flex items-center justify-between border-b border-white/5 px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
-          <h1 class="text-base font-semibold leading-7 text-white">{{ title }}</h1>
-        </header>
-
-        <!-- Fil d'arianne -->
-        <ul role="list" class="divide-y divide-white/5">
-          <li class="relative flex items-center space-x-4 px-4 py-4 sm:px-6 lg:px-8">
-            <div class="min-w-0 flex-auto">
-              <div class="flex items-center gap-x-3">
-                <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
-                  <div class="h-2 w-2 rounded-full bg-current"></div>
-                </div>
-                <h2 class="min-w-0 text-sm font-semibold leading-6 text-white">
-                  <a href="#" class="flex gap-x-2">
-                    <span class="truncate">Les sentinelles</span>
-                    <span class="text-gray-400">/</span>
-                    <span class="whitespace-nowrap">Nenyïm</span>
-                    <span class="absolute inset-0"></span>
-                  </a>
-                </h2>
-              </div>
+              <label for="realm" class="sr-only">Serveur</label>
+              <select formControlName="realm" id="realm" name="location"
+                      class="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                <option value="les-Clairvoyants">Les Clairvoyants</option>
+                <option value="les-sentinelles" selected>Les Sentinelles</option>
+                <option value="hyjal">Hyjal</option>
+                <option value="confrerie-du-thorium">Confréfie du Thorium</option>
+                <option value="archimonde">Archimonde</option>
+                <option value="conseil-des-ombres">Conseil des ombres</option>
+                <option value="Dalaran">Dalaran</option>
+                <option value="Elune">Elune</option>
+                <option value="kirin-tor">Kirin Tor</option>
+                <option value="ysondre">Ysondre</option>
+              </select>
             </div>
-          </li>
-
-        </ul>
-        <!-- Fil d'arianne -->
-
-        <!-- Les donjons m+ de la saison -->
-        <pre>{{ search.value | json }}</pre>
-        <app-donjons></app-donjons>
-        <!-- Les donjons m+ de la saison -->
-
-        <!-- Les logs -->
-        <app-logs></app-logs>
-        <!-- Les logs -->
-
-        <!-- Activités -->
-        <app-activite></app-activite>
-        <!-- Activités -->
-
-      </main>
+            <button
+              class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+              Rechercher
+            </button>
+          </div>
+        </form>
+      </div>
+      <!-- Bloc Recherche -->
     </div>
+  </section>
+
+
+  <main class="lg:pr-96">
+    <header class="flex items-center justify-between border-b border-white/5 px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
+      <h1 class="text-base font-semibold leading-7 text-white">{{ title }}</h1>
+    </header>
+    <router-outlet></router-outlet>
   </main>
 </div>
-<router-outlet></router-outlet>
+

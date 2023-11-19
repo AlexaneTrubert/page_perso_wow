@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Logs} from "./types";
 
 @Component({
@@ -7,5 +7,6 @@ import {Logs} from "./types";
   styles: []
 })
 export class LogsComponent {
+  @Input()
   logs: Logs = [];
 }

@@ -26,17 +26,14 @@
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Meilleur temps
                   </th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Affix</th>
-                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Top Mondial
-                  </th>
-                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Top Région</th>
                 </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-800">
                 <tr class="donjon-row" *ngFor="let donjon of donjons">
                   <td
                     class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">{{ donjon.nom }}</td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.niveauFortifie}}</td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">+{{ donjon.niveauTyranique }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">+ {{ donjon.niveauFortifie}}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.niveauTyranique }}</td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.points }}</td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.temps }}</td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
@@ -44,8 +41,6 @@
                       <li *ngFor="let affix of donjon.affixes" class="list-affix">{{ affix.nom }}/</li>
                     </ul>
                   </td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.topMonde }}</td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.topRegion }}</td>
                 </tr>
                 </tbody>
               </table>

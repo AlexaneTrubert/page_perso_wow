@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Activites} from "./types";
 
 @Component({
@@ -7,5 +7,8 @@ import {Activites} from "./types";
   styles: []
 })
 export class ActiviteComponent {
-  activites: Activites = [];
+  @Input()
+  activites: Activites | undefined;
+
+
 }

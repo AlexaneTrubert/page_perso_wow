@@ -1,0 +1,38 @@
+<!-- Fil d'arianne -->
+<ul role="list" class="divide-y divide-white/5">
+  <li class="relative flex items-center space-x-4 px-4 py-4 sm:px-6 lg:px-8">
+    <div class="min-w-0 flex-auto">
+      <div class="flex items-center gap-x-3">
+        <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
+          <div class="h-2 w-2 rounded-full bg-current"></div>
+        </div>
+        <h2 class="min-w-0 text-sm font-semibold leading-6 text-white">
+          <a href="#" class="flex gap-x-2">
+            <span class="truncate">{{ perso?.serveur }}</span>
+            <span class="text-gray-400">/</span>
+            <span class="whitespace-nowrap">{{ perso?.pseudo }}</span>
+            <span class="absolute inset-0"></span>
+          </a>
+        </h2>
+      </div>
+    </div>
+  </li>
+
+</ul>
+<!-- Fil d'arianne -->
+
+<!-- Les donjons m+ de la saison -->
+<app-donjons [donjons]="donjons"></app-donjons>
+<!-- Les donjons m+ de la saison -->
+
+<!-- Les logs -->
+<app-logs [logs]="logs"></app-logs>
+<!-- Les logs -->
+
+<!-- Activités -->
+<app-activite [activites]="activites"></app-activite>
+<!-- Activités -->
+
+<!-- Raids -->
+<app-raid [raids]="raids"></app-raid>
+<!-- Raids -->

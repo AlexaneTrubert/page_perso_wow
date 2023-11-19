@@ -1,18 +1,60 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DonjonsComponent } from './donjons.component';
+import {DonjonsComponent} from './donjons.component';
 
 const MOCK_AFFIXES = [
-  {nom: 'Sanguin'},
-  {nom: 'Explosif'},
-  {nom: 'Fortifié'},
-  ];
+  {
+    id: 1,
+    nom: "Sanguin",
+    description: "Flaque au sol qui heal les ennemis",
+    logo: 'mouh.jpg',
+  },
+  {
+    id: 2,
+    nom: "Sanguin",
+    description: "Flaque au sol qui heal les ennemis",
+    logo: 'mouh.jpg',
+  },
+  {
+    id: 3,
+    nom: "Sanguin",
+    description: "Flaque au sol qui heal les ennemis",
+    logo: 'mouh.jpg',
+  }
+];
 
 const MOCK_DONJONS = [
-    {nom: 'Profondeurs Sanguines', niveauTyranique: 20, niveauFortifie: 20, points: 360, temps: '24min 30s', affixes: MOCK_AFFIXES, topMonde: 1, topRegion: 1},
-    {nom: 'Malpeste', niveauTyranique: 20, niveauFortifie: 20, points: 360, temps: '24min 30s', affixes: MOCK_AFFIXES, topMonde: 1, topRegion: 1},
-    {nom: 'Port-liberté', niveauTyranique: 20, niveauFortifie: 20, points: 360, temps: '24min 30s', affixes: MOCK_AFFIXES, topMonde: 1, topRegion: 1},
-  ];
+  {
+    nom: 'Profondeurs Sanguines',
+    niveauTyranique: 20,
+    niveauFortifie: 20,
+    points: 360,
+    temps: 154844,
+    affixes: MOCK_AFFIXES,
+    topMonde: 1,
+    topRegion: 1
+  },
+  {
+    nom: 'Malpeste',
+    niveauTyranique: 20,
+    niveauFortifie: 20,
+    points: 360,
+    temps: 154844,
+    affixes: MOCK_AFFIXES,
+    topMonde: 1,
+    topRegion: 1
+  },
+  {
+    nom: 'Port-liberté',
+    niveauTyranique: 20,
+    niveauFortifie: 20,
+    points: 360,
+    temps: 154844,
+    affixes: MOCK_AFFIXES,
+    topMonde: 1,
+    topRegion: 1
+  },
+];
 
 describe('DonjonsComponent', () => {
   let component: DonjonsComponent;
@@ -24,7 +66,6 @@ describe('DonjonsComponent', () => {
     });
     fixture = TestBed.createComponent(DonjonsComponent);
     component = fixture.componentInstance;
-    component.affixes = MOCK_AFFIXES;
     component.donjons = MOCK_DONJONS;
     fixture.detectChanges();
   });
