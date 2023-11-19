@@ -11,6 +11,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { RaidComponent } from './raid/raid.component';
 import { PagePersoComponent } from './page-perso/page-perso.component';
+import {RemplaceTiretPipe} from "./page-perso/remplaceTiret.pipe";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { PagePersoComponent } from './page-perso/page-perso.component';
     LogsComponent,
     RaidComponent,
     PagePersoComponent,
+    RemplaceTiretPipe
   ],
   imports: [
     BrowserModule,
