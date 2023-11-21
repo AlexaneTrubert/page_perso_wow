@@ -5,6 +5,7 @@ import {Guilde, Guildes, Perso, Persos} from "./perso/types";
 import {Logs} from "./logs/types";
 import {Activites} from "./activite/types";
 import {RaiderioService} from "./services/raiderio.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,7 @@ export class AppComponent {
   perso: Perso | undefined;
   raids = [];
 
-  constructor(private raiderIo: RaiderioService) {
+  constructor(private router: Router) {
   }
 
   search = new FormGroup({
@@ -43,22 +44,10 @@ export class AppComponent {
   }
 
   onSubmit() {
-    this.raiderIo.getCharacterMythicPlusRanks(this.name.value, this.realm.value, this.region.value).subscribe((data: Perso) => {
-      this.perso = data;
-      if(data.guilde) {
-        this.guildes = [
-          {nom: data.guilde.nom, faction: data.faction, serveur: data.guilde.serveur, continent: data.continent}
-        ];
-      }
-    });
-    this.raiderIo.getCharacterMythicPlusBestRuns(this.name.value, this.realm.value, this.region.value).subscribe((data: Donjons) => {
-      this.donjons = data;
-    });
-    this.raiderIo.getCharacterMythicLastRuns(this.name.value, this.realm.value, this.region.value).subscribe((data: any) => {
-      this.activites = data;
-    });
-    this.raiderIo.getCharacterRaidsProgress(this.name.value, this.realm.value, this.region.value).subscribe((data: any) => {
-      this.raids = data;
-    });
+    const name = this.name.value
+    const region = this.region.value;
+    const realm = this.realm.value;
+
+    this.router.navigate([region, realm, name]);
   }
 }

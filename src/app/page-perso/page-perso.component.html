@@ -8,9 +8,11 @@
         </div>
         <h2 class="min-w-0 text-sm font-semibold leading-6 text-white">
           <a href="#" class="flex gap-x-2">
-            <span class="truncate">{{ perso?.serveur }}</span>
+            <span class="truncate">{{ regionName | titlecase }}</span>
             <span class="text-gray-400">/</span>
-            <span class="whitespace-nowrap">{{ perso?.pseudo }}</span>
+            <span class="truncate">{{ serveurName | titlecase | remlaceTiret }}</span>
+            <span class="text-gray-400">/</span>
+            <span class="whitespace-nowrap">{{ persoName | titlecase }}</span>
             <span class="absolute inset-0"></span>
           </a>
         </h2>
