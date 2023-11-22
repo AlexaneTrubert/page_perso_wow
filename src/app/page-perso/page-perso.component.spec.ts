@@ -12,8 +12,7 @@ import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {RaiderioService} from "../services/raiderio.service";
 import {RemplaceTiretPipe} from "./remplaceTiret.pipe";
 import {of} from "rxjs";
-import {Affixes} from "../donjons/types";
-import {data} from "autoprefixer";
+import {MillisecondeToMinutesPipe} from "../donjons/millisecondeToMinutes.pipe";
 
 describe('PagePersoComponent', () => {
   let component: PagePersoComponent;
@@ -21,7 +20,7 @@ describe('PagePersoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PagePersoComponent, PersoComponent, DonjonsComponent, ActiviteComponent, LogsComponent, RaidComponent, RemplaceTiretPipe],
+      declarations: [PagePersoComponent, PersoComponent, DonjonsComponent, ActiviteComponent, LogsComponent, RaidComponent, RemplaceTiretPipe, MillisecondeToMinutesPipe],
       imports: [ReactiveFormsModule, RouterTestingModule, HttpClientTestingModule],
       providers: [RaiderioService]
     }).compileComponents();

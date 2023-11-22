@@ -12,6 +12,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { RaidComponent } from './raid/raid.component';
 import { PagePersoComponent } from './page-perso/page-perso.component';
 import {RemplaceTiretPipe} from "./page-perso/remplaceTiret.pipe";
+import {MillisecondeToMinutesPipe} from "./donjons/millisecondeToMinutes.pipe";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {RemplaceTiretPipe} from "./page-perso/remplaceTiret.pipe";
     LogsComponent,
     RaidComponent,
     PagePersoComponent,
-    RemplaceTiretPipe
+    RemplaceTiretPipe,
+    MillisecondeToMinutesPipe
   ],
   imports: [
     BrowserModule,

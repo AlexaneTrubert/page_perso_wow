@@ -35,7 +35,7 @@
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">+ {{ donjon.niveauFortifie}}</td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.niveauTyranique }}</td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.points }}</td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.temps }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.temps | minutes }}</td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
                     <ul class="flex">
                       <li *ngFor="let affix of donjon.affixes" class="list-affix">{{ affix.nom }}/</li>

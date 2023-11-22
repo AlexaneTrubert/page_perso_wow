@@ -1,6 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {DonjonsComponent} from './donjons.component';
+import {MillisecondeToMinutesPipe} from "./millisecondeToMinutes.pipe";
 
 const MOCK_AFFIXES = [
   {
@@ -62,7 +63,7 @@ describe('DonjonsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DonjonsComponent]
+      declarations: [DonjonsComponent, MillisecondeToMinutesPipe]
     });
     fixture = TestBed.createComponent(DonjonsComponent);
     component = fixture.componentInstance;

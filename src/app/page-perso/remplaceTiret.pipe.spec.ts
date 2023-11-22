@@ -8,7 +8,7 @@ describe('RemplaceTiretPipe', () => {
     pipe = new RemplaceTiretPipe();
   });
 
-  it('transforms "hello-world" to "Hello World"', () => {
+  it('should transforms "hello-world" to "Hello World"', () => {
     const transformedValue = pipe.transform('hello-world');
     expect(transformedValue).toBe('Hello World');
   });
