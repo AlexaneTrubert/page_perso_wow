@@ -12,7 +12,7 @@
         <div class="mt-8 flow-root">
           <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-              <table *ngIf="donjons.length > 0; else noDonjon"
+              <table *ngIf="donjons; else noDonjon"
                      class="min-w-full divide-y divide-gray-700 donjon-table">
                 <thead>
                 <tr>
@@ -30,17 +30,16 @@
                 </thead>
                 <tbody class="divide-y divide-gray-800">
                 <tr class="donjon-row" *ngFor="let donjon of donjons">
-                  <td
-                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">{{ donjon.nom }}</td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">+ {{ donjon.niveauFortifie}}</td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.niveauTyranique }}</td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.points }}</td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.temps | minutes }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{  donjon?.name }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">+ {{ donjon?.fortifiedRun.niveau }} ({{ donjon?.fortifiedRun.upgrade }})</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">+ {{ donjon?.tyranicalRun.mythic_level }}({{donjon?.tyranicalRun.num_keystone_upgrades}})</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon?.best_run[0].score }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon?.best_run[0].clear_time_ms | minutes }}</td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
                     <ul class="flex">
-                      <li *ngFor="let affix of donjon.affixes" class="list-affix">{{ affix.nom }}/</li>
+                      <li *ngFor="let affix of donjon?.best_run[0].affixes" class="list-affix">{{ affix.nom }}/</li>
                     </ul>
-                  </td>
+<!--                  </td>-->
                 </tr>
                 </tbody>
               </table>

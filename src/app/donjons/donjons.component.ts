@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {Donjons} from "./types";
+import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {DonjonInfo, Donjons} from "./types";
 import {Input} from "@angular/core";
 
 @Component({
@@ -9,6 +9,5 @@ import {Input} from "@angular/core";
 })
 export class DonjonsComponent {
   @Input()
-  donjons: Donjons = [];
-
+  donjons: any = [];
 }

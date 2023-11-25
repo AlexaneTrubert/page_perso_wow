@@ -1,9 +1,9 @@
 export type Donjon = {
   nom: string;
-  niveauFortifie?: number;
-  niveauTyranique?: number;
+  niveau: number;
   points: number;
   temps: number;
+  upgrade: number;
   affixes: Affixes;
 };
 
@@ -45,6 +45,7 @@ export type DonjonsApi = {
   profile_banner?: string;
   mythic_plus_best_runs: DonjonApi[];
   mythic_plus_recent_runs: DonjonApi[];
+  mythic_plus_alternate_runs: DonjonApi[];
 }
 
 export type DonjonApi = {
@@ -60,3 +61,23 @@ export type DonjonApi = {
   affixes: AffixesApi;
   url: string;
 }
+
+export type DonjonRun = {
+  name: string;
+  clear_time_ms?: number;
+  affixes: Affixes;
+  mythic_level?: number;
+  score?: number;
+  num_keystone_upgrades?: number;
+}
+
+export type DonjonInfo = [
+  fortifiedRun?: DonjonRun,
+  tyranicalRun?: DonjonRun,
+];
+
+export type DonjonsApiResponse = {
+  mythic_plus_best_runs: DonjonApi[];
+  mythic_plus_recent_runs: DonjonApi[];
+  mythic_plus_alternate_runs: DonjonApi[];
+};

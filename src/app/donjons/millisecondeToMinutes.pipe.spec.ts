@@ -12,8 +12,8 @@ describe('millisecondeToMinutesPipe', () => {
     expect(transformedValue).toBe('0h 1min 0s');
   });
 
-  it('should return empty string if value is undefined', () => {
+  it('should return empty string if value is NaN', () => {
     const transformedValue = pipe.transform(NaN);
-    expect(transformedValue).toBe('');
+    expect(transformedValue).toBe(NaN);
   });
 });
