@@ -13,6 +13,7 @@ import {RaiderioService} from "../services/raiderio.service";
 import {RemplaceTiretPipe} from "./remplaceTiret.pipe";
 import {of} from "rxjs";
 import {MillisecondeToMinutesPipe} from "../donjons/millisecondeToMinutes.pipe";
+import {Donjons} from "../donjons/types";
 
 describe('PagePersoComponent', () => {
   let component: PagePersoComponent;
@@ -41,14 +42,14 @@ describe('PagePersoComponent', () => {
       "hm": 5,
       "mm": 5,
     },
-    {
-      "nom": "mouh",
-      "boss": 5,
-      "summary": "mouh",
-      "nm": 5,
-      "hm": 5,
-      "mm": 5,
-    }];
+      {
+        "nom": "mouh",
+        "boss": 5,
+        "summary": "mouh",
+        "nm": 5,
+        "hm": 5,
+        "mm": 5,
+      }];
     spyOn(TestBed.inject(RaiderioService), 'getCharacterRaidsProgress').and.returnValue(of(MOCK_RAIDS_PROGRESS_DATA));
     fixture.detectChanges();
 
@@ -64,34 +65,17 @@ describe('PagePersoComponent', () => {
         "donjon": "mouh",
         "niveau": 5
       },
-      {
-        "date": "2023-11-20T21:39:45.000Z",
-        "donjon": "mouh",
-        "niveau": 5
-      }]
+        {
+          "date": "2023-11-20T21:39:45.000Z",
+          "donjon": "mouh",
+          "niveau": 5
+        }]
     };
     spyOn(TestBed.inject(RaiderioService), 'getCharacterMythicLastRuns').and.returnValue(of(MOCK_ACTIVITIES_DATA));
     fixture.detectChanges();
 
     expect(fixture.nativeElement.querySelectorAll('app-activite')).toBeDefined();
   });
-
-  // it('should show best runs when you go on page', () => {
-  //   const MOCK_BEST_RUNS_DATA = [{
-  //     "nom": "mouh",
-  //     "niveau": 20,
-  //     "points": 360,
-  //     "temps": 145879654,
-  //     "affixes": [{"logo": "Sanguine.png", "nom": "Sanguine", "description": "mouh"},
-  //       {"logo": "Sanguine.png", "nom": "Sanguine", "description": "mouh"},],
-  //     "upgrade": 1
-  //   }];
-  //
-  //   spyOn(TestBed.inject(RaiderioService), 'getCharacterMythicPlusBestRuns').and.returnValue(of(MOCK_BEST_RUNS_DATA));
-  //   fixture.detectChanges();
-  //
-  //   expect(fixture.nativeElement.querySelectorAll('app-donjons')).toBeDefined();
-  // });
 
   it('should set guildes array if data.guilde is defined', fakeAsync(() => {
     const mockPerso = {
@@ -131,5 +115,49 @@ describe('PagePersoComponent', () => {
     tick();
 
     expect(component.guildes).toEqual([]);
+  }));
+
+  it('should correctly fetch and update the donjons data', fakeAsync(() => {
+    const mockBestRuns: Donjons = [{
+      nom: 'Donjon 1',
+      niveau: 1,
+      temps: 1,
+      upgrade: 2,
+      points: 3,
+      affixes: []
+    }, {nom: 'Donjon 2', niveau: 1, temps: 1, upgrade: 2, points: 3, affixes: []}];
+    const mockAlternateRuns: Donjons = [{
+      nom: 'Donjon 1',
+      niveau: 1,
+      temps: 1,
+      upgrade: 2,
+      points: 3,
+      affixes: []
+    }, {nom: 'Donjon 2', niveau: 1, temps: 1, upgrade: 2, points: 3, affixes: []}];
+    spyOn(TestBed.inject(RaiderioService), 'getCharacterMythicPlusBestRuns').and.returnValue(of(mockBestRuns));
+    spyOn(TestBed.inject(RaiderioService), 'getCharacterMythicPlusAlternateRuns').and.returnValue(of(mockAlternateRuns));
+
+    const expectedDonjons = [
+      {
+        name: 'Donjon1',
+        bestRun: mockBestRuns[0],
+        alternateRun: mockAlternateRuns[0]
+      },
+      {
+        name: 'Donjon2',
+        bestRun: mockBestRuns[1],
+        alternateRun: mockAlternateRuns[1]
+      }
+    ]
+
+    component.persoName = 'pseudo';
+    component.serveurName = 'realm';
+    component.regionName = 'region';
+
+    component.fetchData();
+
+    tick();
+
+    expect(component.donjons).toBeDefined();
   }));
 });

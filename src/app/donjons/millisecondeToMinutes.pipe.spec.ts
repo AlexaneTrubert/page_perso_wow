@@ -14,6 +14,6 @@ describe('millisecondeToMinutesPipe', () => {
 
   it('should return empty string if value is NaN', () => {
     const transformedValue = pipe.transform(NaN);
-    expect(transformedValue).toBe(NaN);
+    expect(transformedValue).toBeNaN();
   });
 });

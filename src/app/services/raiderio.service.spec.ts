@@ -2,6 +2,168 @@ import {TestBed} from "@angular/core/testing";
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import {HttpClient} from "@angular/common/http";
 import {RaiderioService} from "./raiderio.service";
+import {Affix, AffixesApi, Donjon, DonjonRun, Donjons, DonjonsApi} from "../donjons/types";
+
+const MOCK_RESPONSE: DonjonsApi = {
+  mythic_plus_best_runs: [
+    {
+      dungeon: "Malepeste",
+      short_name: "ML",
+      mythic_level: 20,
+      completed_at: "aujourd'hui",
+      clear_time_ms: 1000,
+      num_keystone_upgrades: 2,
+      map_challenge_mode_id: 1,
+      zone_id: 2,
+      score: 1000,
+      affixes: [
+        {
+          id: 1,
+          name: 'Affixe 1',
+          description: 'Description de l\'affixe 1',
+          icon: 'icone1.png',
+          wowhead_url: 'lien1'
+        },
+        {
+          id: 2,
+          name: 'Affixe 2',
+          description: 'Description de l\'affixe 2',
+          icon: 'icone2.png',
+          wowhead_url: 'lien2'
+        }
+      ],
+      url: 'url'
+    },
+    {
+      dungeon: "Malepeste",
+      short_name: "ML",
+      mythic_level: 20,
+      completed_at: "aujourd'hui",
+      clear_time_ms: 1000,
+      num_keystone_upgrades: 2,
+      map_challenge_mode_id: 1,
+      zone_id: 2,
+      score: 1000,
+      affixes: [
+        {
+          id: 1,
+          name: 'Affixe 1',
+          description: 'Description de l\'affixe 1',
+          icon: 'icone1.png',
+          wowhead_url: 'lien1'
+        },
+        {
+          id: 2,
+          name: 'Affixe 2',
+          description: 'Description de l\'affixe 2',
+          icon: 'icone2.png',
+          wowhead_url: 'lien2'
+        }
+      ],
+      url: 'url'
+    }
+  ],
+  mythic_plus_recent_runs: [],
+  mythic_plus_alternate_runs: [
+    {
+      dungeon: "Malepeste",
+      short_name: "ML",
+      mythic_level: 20,
+      completed_at: "aujourd'hui",
+      clear_time_ms: 1000,
+      num_keystone_upgrades: 2,
+      map_challenge_mode_id: 1,
+      zone_id: 2,
+      score: 1000,
+      affixes: [
+        {
+          id: 1,
+          name: 'Affixe 1',
+          description: 'Description de l\'affixe 1',
+          icon: 'icone1.png',
+          wowhead_url: 'lien1'
+        },
+        {
+          id: 2,
+          name: 'Affixe 2',
+          description: 'Description de l\'affixe 2',
+          icon: 'icone2.png',
+          wowhead_url: 'lien2'
+        }
+      ],
+      url: 'url'
+    },
+    {
+      dungeon: "Malepeste",
+      short_name: "ML",
+      mythic_level: 20,
+      completed_at: "aujourd'hui",
+      clear_time_ms: 1000,
+      num_keystone_upgrades: 2,
+      map_challenge_mode_id: 1,
+      zone_id: 2,
+      score: 1000,
+      affixes: [
+        {
+          id: 1,
+          name: 'Affixe 1',
+          description: 'Description de l\'affixe 1',
+          icon: 'icone1.png',
+          wowhead_url: 'lien1'
+        },
+        {
+          id: 2,
+          name: 'Affixe 2',
+          description: 'Description de l\'affixe 2',
+          icon: 'icone2.png',
+          wowhead_url: 'lien2'
+        }
+      ],
+      url: 'url'
+    }
+  ],
+};
+
+const EXPECTED_DONJON: Donjons = [
+  {
+    nom: "Malepeste",
+    niveau: 20,
+    points: 1000,
+    temps: 1000,
+    upgrade: 2,
+    affixes: [
+      {
+        nom: 'Affixe 1',
+        description: 'Description de l\'affixe 1',
+        logo: 'icone1.png'
+      },
+      {
+        nom: 'Affixe 2',
+        description: 'Description de l\'affixe 2',
+        logo: 'icone2.png'
+      }
+    ]
+  },
+  {
+    nom: "Malepeste",
+    niveau: 20,
+    points: 1000,
+    temps: 1000,
+    upgrade: 2,
+    affixes: [
+      {
+        nom: 'Affixe 1',
+        description: 'Description de l\'affixe 1',
+        logo: 'icone1.png'
+      },
+      {
+        nom: 'Affixe 2',
+        description: 'Description de l\'affixe 2',
+        logo: 'icone2.png'
+      }
+    ]
+  }
+];
 
 describe('RaiderioService', () => {
   it("should get character mythic plus ranks", (done: DoneFn) => {
@@ -46,44 +208,42 @@ describe('RaiderioService', () => {
     });
   });
 
-  it("sould display donjons when we call getCharacterMythicPlusRanks", (done: DoneFn) => {
+  it('should display best runs when we call getCharacterMythicPlusBestRuns', (done: DoneFn) => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
+      providers: [RaiderioService],
     });
 
-    const http = TestBed.inject(HttpClient);
-    const httpController = TestBed.inject(HttpTestingController);
+    const service = TestBed.inject(RaiderioService);
 
-    const service = new RaiderioService(http);
-
-    service.getCharacterMythicPlusBestRuns('Nenyïm', 'les-sentinelles', 'eu').subscribe((data: any) => {
-      expect(data[0].nom).toBe('Malepeste');
+    service.getCharacterMythicPlusBestRuns('pseudo', 'realm', 'region').subscribe((donjonRuns: Donjons) => {
+      expect(donjonRuns).toEqual(EXPECTED_DONJON);
       done();
     });
 
-    const request = httpController.expectOne("https://raider.io/api/v1/characters/profile?region=eu&realm=les-sentinelles&name=Nenyïm&fields=mythic_plus_best_runs");
+    const httpController = TestBed.inject(HttpTestingController);
+    const req = httpController.expectOne('https://raider.io/api/v1/characters/profile?region=region&realm=realm&name=pseudo&fields=mythic_plus_best_runs');
+    expect(req.request.method).toBe('GET');
+    req.flush(MOCK_RESPONSE);
+  });
 
-    request.flush({
-      mythic_plus_best_runs: [
-        {
-          dungeon: "Malepeste",
-          short_name: "m",
-          mythic_level: 20,
-          completed_at: "string",
-          clear_time_ms: 125478,
-          num_keystone_upgrades: 20,
-          map_challenge_mode_id: 1,
-          zone_id: 1,
-          score: 160,
-          affixes: [
-            {id: 1, name: "string", description: "string", icon: "string", wowhead_url: "string"},
-            {id: 2, name: "string", description: "string", icon: "string", wowhead_url: "string"},
-            {id: 3, name: "string", description: "string", icon: "string", wowhead_url: "string"},
-          ],
-          url: "string",
-        }
-      ],
+  it('should display best alternate runs when we call getCharacterMythicPlusAlternateRuns', (done: DoneFn) => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [RaiderioService],
     });
+
+    const service = TestBed.inject(RaiderioService);
+
+    service.getCharacterMythicPlusAlternateRuns('pseudo', 'realm', 'region').subscribe((donjonRuns: Donjons) => {
+      expect(donjonRuns).toEqual(EXPECTED_DONJON);
+      done();
+    });
+
+    const httpController = TestBed.inject(HttpTestingController);
+    const req = httpController.expectOne('https://raider.io/api/v1/characters/profile?region=region&realm=realm&name=pseudo&fields=mythic_plus_alternate_runs');
+    expect(req.request.method).toBe('GET');
+    req.flush(MOCK_RESPONSE);
   });
 
   it('should display activities when we call getCharacterMythicLastRuns', (done: DoneFn) => {
@@ -177,5 +337,48 @@ describe('RaiderioService', () => {
     expect(request.request.method).toEqual('GET');
 
     request.flush(MOCK_RESPONSE);
+  });
+
+  it('should map AffixesApi to Affixes', () => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+    });
+
+    const http = TestBed.inject(HttpClient);
+
+    const service = new RaiderioService(http);
+    const affixesApi: AffixesApi = [
+      {
+        id: 1,
+        name: 'Affixe 1',
+        description: 'Description de l\'affixe 1',
+        icon: 'icone1.png',
+        wowhead_url: 'lien1'
+      },
+      {
+        id: 2,
+        name: 'Affixe 2',
+        description: 'Description de l\'affixe 2',
+        icon: 'icone2.png',
+        wowhead_url: 'lien2'
+      }
+    ];
+
+    const expectedAffixes: Affix[] = [
+      {
+        nom: 'Affixe 1',
+        description: 'Description de l\'affixe 1',
+        logo: 'icone1.png'
+      },
+      {
+        nom: 'Affixe 2',
+        description: 'Description de l\'affixe 2',
+        logo: 'icone2.png'
+      }
+      // Ajoute d'autres objets Affix si nécessaire pour les tests
+    ];
+
+    const result = service.mapAffixes(affixesApi);
+    expect(result).toEqual(expectedAffixes);
   });
 });

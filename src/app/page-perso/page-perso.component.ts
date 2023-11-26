@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {DonjonInfo, DonjonRun, Donjons} from "../donjons/types";
 import {Guildes, Perso, Persos} from "../perso/types";
 import {Logs} from "../logs/types";
 import {Activites} from "../activite/types";
@@ -60,12 +59,12 @@ export class PagePersoComponent implements OnInit {
     this.raiderIo.getCharacterMythicPlusBestRuns(this.persoName, this.serveurName, this.regionName).subscribe(bestRuns => {
       this.raiderIo.getCharacterMythicPlusAlternateRuns(this.persoName, this.serveurName, this.regionName).subscribe(bestAlternateRuns => {
         const allRuns = [...bestRuns, ...bestAlternateRuns];
-        const allDonjons = Array.from(new Set(allRuns.map(run => run.name)));
+        const allDonjons = Array.from(new Set(allRuns.map(run => run.nom)));
 
         const donjonsData : any = []; // Tableau pour stocker les données des donjons
 
         allDonjons.forEach(donjon => {
-          const donjonRuns = allRuns.filter(run => run.name === donjon);
+          const donjonRuns = allRuns.filter(run => run.nom === donjon);
 
           const foundFortifiedRun = donjonRuns.find(run => run.affixes.find(affixe => affixe.nom === 'Fortified'));
           const foundTyrannicalRun = donjonRuns.find(run => run.affixes.find(affixe => affixe.nom === 'Tyrannical'));
@@ -75,7 +74,7 @@ export class PagePersoComponent implements OnInit {
               name: donjon,
               fortifiedRun: foundFortifiedRun,
               tyranicalRun: foundTyrannicalRun,
-              best_run: bestRuns.filter(run => run.name === donjon),
+              best_run: bestRuns.filter(run => run.nom === donjon),
             };
             donjonsData.push(donjonData);
           }

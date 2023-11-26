@@ -5,12 +5,9 @@ import {Perso, PersoApi} from "../perso/types";
 import {
   Affix,
   Affixes,
-  AffixesApi,
-  Donjon,
-  DonjonApi,
+  AffixesApi, Donjon,
   DonjonRun,
   DonjonsApi,
-  DonjonsApiResponse
 } from "../donjons/types";
 import {Activites} from "../activite/types";
 import {RaidApi, Raids} from "../raid/types";
@@ -46,18 +43,18 @@ export class RaiderioService {
   }
 
   getCharacterMythicPlusBestRuns(pseudo: string | null, realm: string | null, region: string | null) {
-    return this.http.get<DonjonsApiResponse>(
+    return this.http.get<DonjonsApi>(
       "https://raider.io/api/v1/characters/profile?region=" + region + "&realm=" + realm + "&name=" + pseudo + "&fields=mythic_plus_best_runs"
     ).pipe(
       map(response => {
         return response.mythic_plus_best_runs.map(item => ({
-          name: item.dungeon,
-          clear_time_ms: item.clear_time_ms,
+          nom: item.dungeon,
+          niveau: item.mythic_level,
+          points: item.score,
+          temps: item.clear_time_ms,
+          upgrade: item.num_keystone_upgrades,
           affixes: this.mapAffixes(item.affixes),
-          mythic_level: item.mythic_level,
-          score: item.score,
-          num_keystone_upgrades: item.num_keystone_upgrades,
-        } as DonjonRun));
+        } as Donjon));
       })
     );
   }
@@ -68,13 +65,13 @@ export class RaiderioService {
         map(response => {
           return response.mythic_plus_alternate_runs.map(item => {
             return {
-              name: item.dungeon,
+              nom: item.dungeon,
               niveau: item.mythic_level,
               points: item.score,
               temps: item.clear_time_ms,
               upgrade: item.num_keystone_upgrades,
               affixes: this.mapAffixes(item.affixes),
-            } as DonjonRun;
+            } as Donjon;
           })
         }));
   }
