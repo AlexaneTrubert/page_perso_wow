@@ -61,7 +61,7 @@ export class PagePersoComponent implements OnInit {
         const allRuns = [...bestRuns, ...bestAlternateRuns];
         const allDonjons = Array.from(new Set(allRuns.map(run => run.nom)));
 
-        const donjonsData : any = []; // Tableau pour stocker les données des donjons
+        const donjonsData: any = []; // Tableau pour stocker les données des donjons
 
         allDonjons.forEach(donjon => {
           const donjonRuns = allRuns.filter(run => run.nom === donjon);
@@ -69,11 +69,21 @@ export class PagePersoComponent implements OnInit {
           const foundFortifiedRun = donjonRuns.find(run => run.affixes.find(affixe => affixe.nom === 'Fortified'));
           const foundTyrannicalRun = donjonRuns.find(run => run.affixes.find(affixe => affixe.nom === 'Tyrannical'));
 
+          // Vérification si les runs fortifiés et tyranniques existent
           if (foundFortifiedRun !== undefined && foundTyrannicalRun !== undefined) {
             const donjonData = {
               name: donjon,
               fortifiedRun: foundFortifiedRun,
               tyranicalRun: foundTyrannicalRun,
+              best_run: bestRuns.filter(run => run.nom === donjon),
+            };
+            donjonsData.push(donjonData);
+          } else {
+            // Si l'un des types de run est undefined, ajouter l'autre type en tant que best run et initialiser l'autre à un objet vide
+            const donjonData = {
+              name: donjon,
+              fortifiedRun: foundFortifiedRun || { nom: '', affixes: [] },
+              tyranicalRun: foundTyrannicalRun || { nom: '', affixes: [] },
               best_run: bestRuns.filter(run => run.nom === donjon),
             };
             donjonsData.push(donjonData);
