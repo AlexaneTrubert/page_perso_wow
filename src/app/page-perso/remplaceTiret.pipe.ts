@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'remlaceTiret'
+  name: 'remplaceTiret'
 })
 export class RemplaceTiretPipe implements PipeTransform {
   transform(value: string): string {

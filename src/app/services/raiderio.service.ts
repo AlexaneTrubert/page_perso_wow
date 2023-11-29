@@ -20,7 +20,7 @@ export class RaiderioService {
   }
 
   getCharacterMythicPlusRanks(pseudo: string | null, realm: string | null, region: string | null) {
-    return this.http.get<PersoApi>("https://raider.io/api/v1/characters/profile?region=" + region + "&realm=" + realm + "&name=" + pseudo + "&fields=guild")
+    return this.http.get<PersoApi>("https://raider.io/api/v1/characters/profile?region=" + region + "&realm=" + realm + "&name=" + pseudo + "&fields=guild%2Cmythic_plus_scores_by_season%3Acurrent")
       .pipe(
         map(response => {
           return {
@@ -36,6 +36,15 @@ export class RaiderioService {
             guilde: {
               nom: response.guild.name,
               serveur: response.guild.realm
+            },
+            rankings: {
+              season: response.mythic_plus_scores_by_season[0].season,
+              score: {
+                all: response.mythic_plus_scores_by_season[0].scores.all,
+                dps: response.mythic_plus_scores_by_season[0].scores.dps,
+                healer: response.mythic_plus_scores_by_season[0].scores.healer,
+                tank: response.mythic_plus_scores_by_season[0].scores.tank
+              }
             }
           } as Perso;
         })

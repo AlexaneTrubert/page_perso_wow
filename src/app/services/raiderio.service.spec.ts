@@ -183,7 +183,7 @@ describe('RaiderioService', () => {
       done();
     });
 
-    const request = httpController.expectOne("https://raider.io/api/v1/characters/profile?region=eu&realm=les-sentinelles&name=Nenyïm&fields=guild");
+    const request = httpController.expectOne("https://raider.io/api/v1/characters/profile?region=eu&realm=les-sentinelles&name=Nenyïm&fields=guild%2Cmythic_plus_scores_by_season%3Acurrent");
 
     request.flush({
       name: "Nenyïm",

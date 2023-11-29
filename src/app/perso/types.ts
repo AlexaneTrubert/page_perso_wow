@@ -14,6 +14,15 @@ export type Perso = {
     nom: string;
     serveur: string;
   }
+  rankings?: {
+    season: string;
+    score: {
+      all: number;
+      dps: number;
+      healer: number;
+      tank: number;
+    }
+  }
 };
 
 export type Persos = Perso[];
@@ -47,4 +56,15 @@ export type PersoApi = {
     "name": string,
     "realm": string,
   }
+  "mythic_plus_scores_by_season": [
+    {
+      "season": string,
+      "scores": {
+        "all": number,
+        "dps": number,
+        "healer": number,
+        "tank": number
+      }
+    }
+  ];
 }
