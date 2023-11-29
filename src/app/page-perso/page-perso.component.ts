@@ -4,6 +4,7 @@ import {Guildes, Perso, Persos} from "../perso/types";
 import {Logs} from "../logs/types";
 import {Activites} from "../activite/types";
 import {RaiderioService} from "../services/raiderio.service";
+import {Raids} from "../raid/types";
 
 @Component({
   selector: 'app-page-perso',
@@ -26,7 +27,8 @@ export class PagePersoComponent implements OnInit {
   logs: Logs = [];
   activites: Activites | undefined;
   perso: Perso | undefined;
-  raids = [];
+  raids: Raids = [];
+  bestScoreRaiderIo?: number;
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -41,6 +43,10 @@ export class PagePersoComponent implements OnInit {
   fetchData() {
     this.raiderIo.getCharacterMythicPlusRanks(this.persoName, this.serveurName, this.regionName).subscribe((data: Perso) => {
       this.perso = data;
+      if (data.rankings) {
+        this.bestScoreRaiderIo = data.rankings.score.all;
+      }
+      console.log(this.perso);
       if (data.guilde) {
         this.guildes = [
           {nom: data.guilde.nom, faction: data.faction, serveur: data.guilde.serveur, continent: data.continent}
