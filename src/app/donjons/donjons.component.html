@@ -31,15 +31,16 @@
                 <tbody class="divide-y divide-gray-800">
                 <tr class="donjon-row" *ngFor="let donjon of donjons">
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{  donjon.name }}</td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">+ {{ donjon.fortifiedRun.niveau }} ({{ donjon.fortifiedRun.upgrade }})</td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">+ {{ donjon.tyranicalRun.niveau }}({{donjon.tyranicalRun.upgrade}})</td>
+                  <td *ngIf="donjon.fortifiedRun.niveau; else noData" class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">+ {{ donjon.fortifiedRun.niveau }}({{ donjon.fortifiedRun.upgrade }})</td>
+                  <td *ngIf="donjon.tyranicalRun.niveau; else noData" class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">+ {{ donjon.tyranicalRun.niveau }}({{donjon.tyranicalRun.upgrade}})</td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.best_run[0].points }}</td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.best_run[0].temps | minutes }}</td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
                     <ul class="flex">
                       <li *ngFor="let affix of donjon.best_run[0].affixes" class="list-affix">{{ affix.nom }}/</li>
                     </ul>
-<!--                  </td>-->
+                  </td>
+                  <ng-template #noData><td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">-</td></ng-template>
                 </tr>
                 </tbody>
               </table>
