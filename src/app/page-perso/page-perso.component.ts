@@ -5,6 +5,7 @@ import {Logs} from "../logs/types";
 import {Activites} from "../activite/types";
 import {RaiderioService} from "../services/raiderio.service";
 import {Raids} from "../raid/types";
+import {DonjonInfo} from "../donjons/types";
 
 @Component({
   selector: 'app-page-perso',
@@ -22,7 +23,7 @@ export class PagePersoComponent implements OnInit {
   persoName: string = this.route.snapshot.params['perso'];
   regionName: string = this.route.snapshot.params['region'];
   title = 'WOWPerso';
-  donjons: any = [];
+  donjons?: DonjonInfo;
   guildes: Guildes = [];
   logs: Logs = [];
   activites: Activites | undefined;
@@ -46,7 +47,6 @@ export class PagePersoComponent implements OnInit {
       if (data.rankings) {
         this.bestScoreRaiderIo = data.rankings.score.all;
       }
-      console.log(this.perso);
       if (data.guilde) {
         this.guildes = [
           {nom: data.guilde.nom, faction: data.faction, serveur: data.guilde.serveur, continent: data.continent}
@@ -96,7 +96,6 @@ export class PagePersoComponent implements OnInit {
           }
         });
         this.donjons = donjonsData;
-        console.log(this.donjons);
       });
     });
   }

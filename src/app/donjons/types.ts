@@ -10,6 +10,7 @@ export type Donjon = {
 export type Donjons = Donjon[];
 
 export type Affix = {
+  id: number;
   logo?: string;
   nom: string;
   description?: string;
@@ -72,12 +73,8 @@ export type DonjonRun = {
 }
 
 export type DonjonInfo = [
+  name: string,
   fortifiedRun?: DonjonRun,
   tyranicalRun?: DonjonRun,
+  bestRun?: DonjonRun,
 ];
-
-export type DonjonsApiResponse = {
-  mythic_plus_best_runs: DonjonApi[];
-  mythic_plus_recent_runs: DonjonApi[];
-  mythic_plus_alternate_runs: DonjonApi[];
-};
