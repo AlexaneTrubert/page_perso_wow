@@ -24,13 +24,13 @@ import {MillisecondeToMinutesPipe} from "./donjons/millisecondeToMinutes.pipe";
     RaidComponent,
     PagePersoComponent,
     RemplaceTiretPipe,
-    MillisecondeToMinutesPipe
+    MillisecondeToMinutesPipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
