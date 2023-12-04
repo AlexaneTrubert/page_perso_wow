@@ -88,6 +88,7 @@ export class RaiderioService {
   mapAffixes(apiAffixes: AffixesApi): Affixes {
     return apiAffixes.map(apiAffix => {
       return {
+        id: apiAffix.id,
         nom: apiAffix.name || '',
         description: apiAffix.description || '',
         logo: apiAffix.icon || ''

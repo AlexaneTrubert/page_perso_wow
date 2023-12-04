@@ -37,7 +37,9 @@
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.best_run[0].temps | minutes }}</td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
                     <ul class="flex">
-                      <li *ngFor="let affix of donjon.best_run[0].affixes" class="list-affix">{{ affix.nom }}/</li>
+                      <li *ngFor="let affix of donjon.best_run[0].affixes" class="list-affix"><a href="" [attr.data-wowhead]="'affix=' + affix.id + '&domain=fr'">
+                        <img src="https://wow.zamimg.com/images/wow/icons/medium/{{affix.logo}}.jpg" alt="Logo pour l'affix {{affix.nom}}">
+                      </a></li>
                     </ul>
                   </td>
                   <ng-template #noData><td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">-</td></ng-template>

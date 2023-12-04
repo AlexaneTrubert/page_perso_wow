@@ -133,11 +133,13 @@ const EXPECTED_DONJON: Donjons = [
     upgrade: 2,
     affixes: [
       {
+        id: 1,
         nom: 'Affixe 1',
         description: 'Description de l\'affixe 1',
         logo: 'icone1.png'
       },
       {
+        id: 2,
         nom: 'Affixe 2',
         description: 'Description de l\'affixe 2',
         logo: 'icone2.png'
@@ -152,11 +154,13 @@ const EXPECTED_DONJON: Donjons = [
     upgrade: 2,
     affixes: [
       {
+        id: 1,
         nom: 'Affixe 1',
         description: 'Description de l\'affixe 1',
         logo: 'icone1.png'
       },
       {
+        id: 2,
         nom: 'Affixe 2',
         description: 'Description de l\'affixe 2',
         logo: 'icone2.png'
@@ -366,11 +370,13 @@ describe('RaiderioService', () => {
 
     const expectedAffixes: Affix[] = [
       {
+        id: 1,
         nom: 'Affixe 1',
         description: 'Description de l\'affixe 1',
         logo: 'icone1.png'
       },
       {
+        id: 2,
         nom: 'Affixe 2',
         description: 'Description de l\'affixe 2',
         logo: 'icone2.png'
