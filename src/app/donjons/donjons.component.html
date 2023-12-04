@@ -31,8 +31,22 @@
                 <tbody class="divide-y divide-gray-800">
                 <tr class="donjon-row" *ngFor="let donjon of donjons">
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{  donjon.name }}</td>
-                  <td *ngIf="donjon.fortifiedRun.niveau; else noData" class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">+ {{ donjon.fortifiedRun.niveau }} <i class="fa-star"></i>({{ donjon.fortifiedRun.upgrade }}) </td>
-                  <td *ngIf="donjon.tyranicalRun.niveau; else noData" class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">+ {{ donjon.tyranicalRun.niveau }} ({{donjon.tyranicalRun.upgrade}}) </td>
+                  <td *ngIf="donjon.fortifiedRun.niveau; else noData" class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.fortifiedRun.niveau }}
+                    <ng-container *ngIf="donjon.fortifiedRun.upgrade > 0">
+                      <ng-container *ngFor="let star of getRange(donjon.fortifiedRun.upgrade); let last = last">
+                        <i class="fa fa-star fa-xs text-warning"></i>
+                        <span *ngIf="!last">&nbsp;</span>
+                      </ng-container>
+                    </ng-container>
+                  </td>
+                  <td *ngIf="donjon.tyranicalRun.niveau; else noData" class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.tyranicalRun.niveau }}
+                    <ng-container *ngIf="donjon.tyranicalRun.upgrade > 0">
+                      <ng-container *ngFor="let star of getRange(donjon.tyranicalRun.upgrade); let last = last">
+                        <i class="fa fa-star fa-xs text-warning"></i>
+                        <span *ngIf="!last">&nbsp;</span>
+                      </ng-container>
+                    </ng-container>
+                  </td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.best_run[0].points }}</td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ donjon.best_run[0].temps | minutes }}</td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">

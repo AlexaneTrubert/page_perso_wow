@@ -31,6 +31,7 @@
               "src/.htaccess"
             ],
             "styles": [
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -66,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "WOWPerso:build:production"
+              "buildTarget": "WOWPerso:build:production"
             },
             "development": {
-              "browserTarget": "WOWPerso:build:development"
+              "buildTarget": "WOWPerso:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -77,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "WOWPerso:build"
+            "buildTarget": "WOWPerso:build"
           }
         },
         "test": {
