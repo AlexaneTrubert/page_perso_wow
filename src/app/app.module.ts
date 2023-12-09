@@ -30,7 +30,7 @@ import {MillisecondeToMinutesPipe} from "./donjons/millisecondeToMinutes.pipe";
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
