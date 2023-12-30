@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Guildes, Perso, Persos} from "../perso/types";
-import {Logs} from "../logs/types";
 import {Activites} from "../activite/types";
 import {RaiderioService} from "../services/raiderio.service";
 import {Raids} from "../raid/types";
 import {DonjonInfo} from "../donjons/types";
+import {Stuff} from "../stuff/types";
 
 @Component({
   selector: 'app-page-perso',
@@ -23,13 +23,13 @@ export class PagePersoComponent implements OnInit {
   persoName: string = this.route.snapshot.params['perso'];
   regionName: string = this.route.snapshot.params['region'];
   title = 'WOWPerso';
-  donjons?: DonjonInfo;
+  donjons!: DonjonInfo;
   guildes: Guildes = [];
-  logs: Logs = [];
   activites: Activites | undefined;
   perso: Perso | undefined;
   raids: Raids = [];
   bestScoreRaiderIo?: number;
+  stuff!: Stuff | null;
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -60,6 +60,11 @@ export class PagePersoComponent implements OnInit {
 
     this.raiderIo.getCharacterRaidsProgress(this.persoName, this.serveurName, this.regionName).subscribe((data: any) => {
       this.raids = data;
+    });
+
+    this.raiderIo.getCharacterStuffs(this.persoName, this.serveurName, this.regionName).subscribe((data: any) => {
+      this.stuff = data;
+      console.log(data);
     });
 
     this.raiderIo.getCharacterMythicPlusBestRuns(this.persoName, this.serveurName, this.regionName).subscribe(bestRuns => {
