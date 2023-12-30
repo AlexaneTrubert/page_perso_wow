@@ -6,11 +6,11 @@ import {
   Affix,
   Affixes,
   AffixesApi, Donjon,
-  DonjonRun,
   DonjonsApi,
 } from "../donjons/types";
 import {Activites} from "../activite/types";
 import {RaidApi, Raids} from "../raid/types";
+import {Item, Items, ItemsApi, Stuff, StuffApi} from "../stuff/types";
 
 @Injectable({
   providedIn: 'root'
@@ -85,17 +85,6 @@ export class RaiderioService {
         }));
   }
 
-  mapAffixes(apiAffixes: AffixesApi): Affixes {
-    return apiAffixes.map(apiAffix => {
-      return {
-        id: apiAffix.id,
-        nom: apiAffix.name || '',
-        description: apiAffix.description || '',
-        logo: apiAffix.icon || ''
-      } as Affix;
-    });
-  }
-
   getCharacterMythicLastRuns(pseudo: string | null, realm: string | null, region: string | null) {
     return this.http.get<DonjonsApi>("https://raider.io/api/v1/characters/profile?region=" + region + "&realm=" + realm + "&name=" + pseudo + "&fields=mythic_plus_recent_runs")
       .pipe(
@@ -138,5 +127,53 @@ export class RaiderioService {
           return raids;
         })
       );
+  }
+
+  getCharacterStuffs(pseudo: string | null, realm: string | null, region: string | null) {
+    return this.http.get<StuffApi>("https://raider.io/api/v1/characters/profile?region=" + region + "&realm=" + realm + "&name=" + pseudo + "&fields=gear")
+      .pipe(
+        map(response => {
+          return {
+            info_equipement: {
+              updated_at: response.gear.updated_at,
+              item_level_equipped: response.gear.item_level_equipped,
+              item_level_total: response.gear.item_level_total
+            },
+            items: this.mapItems(response.gear.items)
+          } as Stuff;
+        })
+      );
+  }
+
+  mapAffixes(apiAffixes: AffixesApi): Affixes {
+    return apiAffixes.map(apiAffix => {
+      return {
+        id: apiAffix.id,
+        nom: apiAffix.name || '',
+        description: apiAffix.description || '',
+        logo: apiAffix.icon || ''
+      } as Affix;
+    });
+  }
+
+  mapItems(apiItems: ItemsApi): Items {
+    const itemsArray: Items = [];
+
+    for (const key in apiItems) {
+      if (Object.prototype.hasOwnProperty.call(apiItems, key)) {
+        const apiItem = apiItems[key];
+        const item: Item = {
+          emplacement: key,
+          name: apiItem.name,
+          ilvl: apiItem.item_level,
+          icon: apiItem.icon,
+          enchant: apiItem.enchant,
+          item_id: apiItem.item_id
+        };
+        itemsArray.push(item);
+      }
+    }
+
+    return itemsArray;
   }
 }

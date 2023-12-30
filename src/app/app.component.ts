@@ -1,10 +1,8 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Donjons} from "./donjons/types";
-import {Guilde, Guildes, Perso, Persos} from "./perso/types";
-import {Logs} from "./logs/types";
+import {Guildes, Perso, Persos} from "./perso/types";
 import {Activites} from "./activite/types";
-import {RaiderioService} from "./services/raiderio.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -17,7 +15,6 @@ export class AppComponent {
   donjons: Donjons = [];
   persos: Persos = [];
   guildes: Guildes = [];
-  logs: Logs = [];
   activites: Activites | undefined;
   perso: Perso | undefined;
   raids = [];

@@ -35,7 +35,7 @@
               </select>
 
               <div class="relative flex-1">
-                <input type="text" formControlName="realm" placeholder="Realm" class="w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-blue-500" (input)="filterRealms($event)">
+                <input type="text" formControlName="realm" placeholder="Royaume" class="w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-blue-500" (input)="filterRealms($event)">
                 <ul *ngIf="filteredRealms.length > 0" class="absolute z-10 w-full bg-white text-gray-500 rounded-md shadow-md mt-2">
                   <li *ngFor="let realm of filteredRealms" class="cursor-pointer px-4 py-2 hover:bg-gray-200" (click)="realmSelected(realm)">{{ realm }}</li>
                 </ul>
