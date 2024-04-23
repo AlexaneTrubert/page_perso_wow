@@ -33,7 +33,7 @@ describe('AppComponent', () => {
 
     const name = 'PlayerName';
     const region = 'EU';
-    const realm = 'RealmName';
+    const realm = 'realmname';
 
     component.search.patchValue({
       name: name,

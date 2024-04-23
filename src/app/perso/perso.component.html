@@ -1,6 +1,14 @@
 <!-- Colonne de gauche, PERSO + GUILDES -->
 <section class="sidebar">
-  <div class="relative z-50 xl:hidden" role="dialog" aria-modal="true">
+<!--  <button type="button" class="-m-2.5 p-2.5 text-white xl:hidden" (click)="toggleMenu()">  &lt;!&ndash; Les trois barres pour faire apparaitre le menu &ndash;&gt;
+    <span class="sr-only">Open sidebar</span>
+    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path fill-rule="evenodd"
+            d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10zm0 5.25a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75a.75.75 0 01-.75-.75z"
+            clip-rule="evenodd"/>
+    </svg>
+  </button>
+  <div class="relative z-50 xl:hidden" [ngClass]="hidden" role="dialog" aria-modal="true">
     <div class="fixed inset-0 bg-gray-900/80"></div>
 
     <div class="fixed inset-0 flex">
@@ -8,7 +16,7 @@
       <div class="relative mr-16 flex w-full max-w-xs flex-1">
 
         <div class="absolute left-full top-0 flex w-16 justify-center pt-5">
-          <button type="button" class="-m-2.5 p-2.5">
+          <button type="button" class="-m-2.5 p-2.5" (click)="toggleMenu()"> &lt;!&ndash; bouton pour fermer la sidebar &ndash;&gt;
             <span class="sr-only">Close sidebar</span>
             <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                  aria-hidden="true">
@@ -116,7 +124,7 @@
                   </li>
                 </ul>
               </li>
-<!--              <li class="-mx-6 mt-auto">
+&lt;!&ndash;              <li class="-mx-6 mt-auto">
                 <a href="#"
                    class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800">
                   <img class="h-8 w-8 rounded-full bg-gray-800"
@@ -125,13 +133,13 @@
                   <span class="sr-only">Ton compte BattleNet</span>
                   <span aria-hidden="true">Almariel</span>
                 </a>
-              </li>-->
+              </li>&ndash;&gt;
             </ul>
           </nav>
         </div>
       </div>
     </div>
-  </div>
+  </div>-->
 
   <div class="hidden xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-72 xl:flex-col">
     <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-black/10 px-6 ring-1 ring-white/5">
@@ -142,6 +150,15 @@
       <nav class="flex flex-1 flex-col">
         <ul role="list" class="flex flex-1 flex-col gap-y-7">
           <li>
+            <div class="text-xs font-semibold leading-6 text-indigo-200">Les affix de la semaine</div>
+            <ul role="list" class="flex">
+              <li *ngFor="let affix of affixes">
+                <a href="https://www.wowhead.com/fr/affix={{affix}}" data-wh-icon-size="medium" class="affixes affixes-affix">
+                </a>
+              </li>
+            </ul>
+          </li>
+<!--          <li>
             <ul *ngIf="persos.length > 0; else noPerso" role="list" class="-mx-2 space-y-1 list-perso">
               <li *ngFor="let perso of persos" class="list-perso-item">
                 <a href="#"
@@ -157,8 +174,8 @@
               </li>
             </ul>
             <ng-template #noPerso><p class="text-sm text-gray-200 no-perso">Pas de personnages</p></ng-template>
-          </li>
-          <li>
+          </li>-->
+<!--          <li>
             <h3 class="text-gray-400 hover:text-white">Vos guildes</h3>
             <ul *ngIf="guildes.length > 0; else noGuild" role="list" class="-mx-2 mt-2 space-y-1 list-guilde">
               <li *ngFor="let guilde of guildes" class="list-guilde-item">
@@ -171,8 +188,8 @@
               </li>
             </ul>
             <ng-template #noGuild><p class="text-sm text-gray-200 no-guilde">Pas de guilde</p></ng-template>
-          </li>
-          <li class="-mx-6 mt-auto">
+          </li>-->
+<!--          <li class="-mx-6 mt-auto">
             <a href="#"
                class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800">
               <img class="h-8 w-8 rounded-full bg-gray-800"
@@ -181,7 +198,7 @@
               <span class="sr-only">Ton compte BattleNet</span>
               <span aria-hidden="true">Almariel</span>
             </a>
-          </li>
+          </li>-->
         </ul>
       </nav>
     </div>

@@ -2,7 +2,7 @@ import {TestBed} from "@angular/core/testing";
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import {HttpClient} from "@angular/common/http";
 import {RaiderioService} from "./raiderio.service";
-import {Affix, AffixesApi, Donjon, DonjonRun, Donjons, DonjonsApi} from "../donjons/types";
+import {Affix, AffixesApi, Donjons, DonjonsApi} from "../donjons/types";
 
 const MOCK_RESPONSE: DonjonsApi = {
   mythic_plus_best_runs: [
@@ -208,6 +208,15 @@ describe('RaiderioService', () => {
       guild: {
         name: "Les Chevaliers de la Table Ronde",
         realm: "les-sentinelles",
+      },
+      ranking: {
+        season: 1,
+        score: {
+          all: 1500,
+          dps: 1500,
+          healer: 1500,
+          tank: 1500
+        }
       }
     });
   });
