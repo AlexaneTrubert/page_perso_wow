@@ -4,7 +4,6 @@ import {PagePersoComponent} from './page-perso.component';
 import {PersoComponent} from "../perso/perso.component";
 import {DonjonsComponent} from "../donjons/donjons.component";
 import {ActiviteComponent} from "../activite/activite.component";
-import {LogsComponent} from "../logs/logs.component";
 import {RaidComponent} from "../raid/raid.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {RouterTestingModule} from "@angular/router/testing";
@@ -14,6 +13,7 @@ import {RemplaceTiretPipe} from "./remplaceTiret.pipe";
 import {of} from "rxjs";
 import {MillisecondeToMinutesPipe} from "../donjons/millisecondeToMinutes.pipe";
 import {Donjons} from "../donjons/types";
+import {StuffComponent} from "../stuff/stuff.component";
 
 describe('PagePersoComponent', () => {
   let component: PagePersoComponent;
@@ -21,7 +21,7 @@ describe('PagePersoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PagePersoComponent, PersoComponent, DonjonsComponent, ActiviteComponent, LogsComponent, RaidComponent, RemplaceTiretPipe, MillisecondeToMinutesPipe],
+      declarations: [PagePersoComponent, PersoComponent, DonjonsComponent, ActiviteComponent, RaidComponent, RemplaceTiretPipe, MillisecondeToMinutesPipe, StuffComponent],
       imports: [ReactiveFormsModule, RouterTestingModule, HttpClientTestingModule],
       providers: [RaiderioService]
     }).compileComponents();

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {Guildes, Perso, Persos} from "../perso/types";
+import {ActivatedRoute} from "@angular/router";
+import {Guildes, Perso} from "../perso/types";
 import {Activites} from "../activite/types";
 import {RaiderioService} from "../services/raiderio.service";
 import {Raids} from "../raid/types";
@@ -15,7 +15,6 @@ import {Stuff} from "../stuff/types";
 export class PagePersoComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
               private raiderIo: RaiderioService) {
   }
 
@@ -64,7 +63,6 @@ export class PagePersoComponent implements OnInit {
 
     this.raiderIo.getCharacterStuffs(this.persoName, this.serveurName, this.regionName).subscribe((data: any) => {
       this.stuff = data;
-      console.log(data);
     });
 
     this.raiderIo.getCharacterMythicPlusBestRuns(this.persoName, this.serveurName, this.regionName).subscribe(bestRuns => {
